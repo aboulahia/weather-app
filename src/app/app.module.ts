@@ -8,8 +8,11 @@ import { MenuComponent } from './menu/menu.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
-
+import { reducer } from './shared/reducers/reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
+import { WeatherEffect } from './shared/effects/effects';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,13 +25,11 @@ import { reducers, metaReducers } from './reducers';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
-    })
+    StoreModule.forRoot({
+      weather: reducer
+    }
+    ),
+    EffectsModule.forRoot([WeatherEffect])
   ],
   providers: [],
   bootstrap: [AppComponent]

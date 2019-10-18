@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from './../app.state';
+import { WeatherI } from '../shared/modele/weather';
+import * as Actions from '../shared/action/action';
 
 @Component({
   selector: 'app-home',
@@ -10,66 +15,21 @@ export class HomeComponent implements OnInit {
 
 
   pays="tunis"
-  constructor(public apiService : ApiService) { }
+  data: Observable<WeatherI>;
+  constructor(private store: Store<AppState>) { 
+
+    this.data = store.select('weather');
+
+    console.log(this.data)
+  }
 
   ngOnInit() {
-    this.apiService.getWeatherData(this.pays)
-    console.log('this.apiService.data ',this.apiService.data)
+    this.store.dispatch(new Actions.getWeather('tunis') )
+
   }
 }
 
 
-
-export interface Coord {
-    lon: number;
-    lat: number;
-}
-
-export interface City {
-    id: number;
-    name: string;
-    coord: Coord;
-    country: string;
-    population: number;
-    timezone: number;
-}
-
-export interface Temp {
-    day: number;
-    min: number;
-    max: number;
-    night: number;
-    eve: number;
-    morn: number;
-}
-
-export interface Weather {
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-}
-
-export interface List {
-    dt: number;
-    sunrise: number;
-    sunset: number;
-    temp: Temp;
-    pressure: number;
-    humidity: number;
-    weather: Weather[];
-    speed: number;
-    deg: number;
-    clouds: number;
-}
-
-export interface RootObject {
-    city: City;
-    cod: string;
-    message: number;
-    cnt: number;
-    list: List[];
-}
 
 
 
