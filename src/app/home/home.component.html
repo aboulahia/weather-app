@@ -1,13 +1,13 @@
 <div class="container">
     <div class="row">
       <div class="col border m-1">
-        <p>{{data.city.name}}</p>
-        <p>Lat : {{data.city.coord.lat}} , Lon : {{data.city.coord.lon}} </p>
+        <p>{{apiService.data.city.name}}</p>
+        <p>Lat : {{apiService.data.city.coord.lat}} , Lon : {{apiService.data.city.coord.lon}} </p>
       </div>
       <div class="col">
        
             <div  class="row">
-              <div  *ngFor="let day of data.list" class="col border m-2">
+              <div  *ngFor="let day of apiService.data.list" class="col border m-2">
                   <h1>{{day.temp.min}}°</h1>
                   <img src="http://openweathermap.org/img/wn/{{day.weather[0].icon}}@2x.png"/>
                   <p>{{day.dt*1000 | date:'short'}}</p>

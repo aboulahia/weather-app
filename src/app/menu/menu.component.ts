@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private apiService : ApiService) { }
 
   ngOnInit() {
+    
+  }
+
+  changePays(pays ) {
+    this.apiService.getWeatherData(pays)
+    console.log("changePays ",pays)
+    this.apiService.pays =pays;
   }
 
 }
