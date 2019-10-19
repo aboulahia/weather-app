@@ -1,7 +1,8 @@
+<app-menu></app-menu>
 <div class="container">
     <div class="row">
       <div class="col border m-1">
-        <p>{{(data | async)?.city.name }}</p>
+        <p>{{(data | async)?.city?.name }}</p>
         <p>Lat : {{(data | async)?.city.coord.lat}} , Lon : {{(data | async)?.city.coord.lon}} </p>
       </div>
       <div class="col">

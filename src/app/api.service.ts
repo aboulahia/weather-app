@@ -17,4 +17,10 @@ export class ApiService {
     return this.http.get<any>('https://api.openweathermap.org/data/2.5/forecast/daily?q='+pays+'&appid=6a5af167ef697a9abb4a775e5684d9c5&units=metric');
   }
   
+
+  login(body) :Observable<any>{
+    console.log(body);
+    return this.http.post<any>('http://40.114.252.223:5400/users/login',body);
+  }
+
 }

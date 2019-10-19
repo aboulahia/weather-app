@@ -18,6 +18,15 @@ import * as Action from './../action/action';
         ))
     )});
     
+    actionLogin$ = createEffect(() => { console.log('effect'); return this.actions$.pipe(
+      ofType(Action.AUTH),
+      mergeMap((action : any) => this.apiService.login(action.payload)
+        .pipe(
+          map(user => ({ type: Action.AUTHDONE, payload: user })),
+          catchError(() => EMPTY)
+        ))
+    )});
+
     constructor(
         private actions$ : Actions,
         private apiService : ApiService
